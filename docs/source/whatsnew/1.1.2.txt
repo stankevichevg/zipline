@@ -4,16 +4,35 @@ Development
 :Release: 1.1.2
 :Date: TBD
 
+.. warning::
+   This release is still under active development.  All changes listed are
+   subject to change at any time.
+
 
 Highlights
 ~~~~~~~~~~
 
-None
+Zipline now defaults to using the ``quandl`` bundle, which you'll need an API Key for, and can find information about in the Data Bundles documentation.
+
+We've added many Tutorial & Documentations updates, includng information on how to create your own ``TradingCalendar``, pass it to your algorithm via the Zipline CLI, and how to use custom csv data using the ``csvdir`` bundle.
+
+Zipline is no longer being tested and packaged for Python 3.4.
+
+Zipline now requests data for SPY, the default benchmark used for Zipline backtests, using the `IEX Trading <https://iextrading.com>__` API, and no longer uses ``pandas-datareader``.
 
 Enhancements
 ~~~~~~~~~~~~
 
-- Sets the default bundle to use ``quandl`` and uses the latest Quandl API. (:issue: ``)
+- Grow minute file cache to 1550 by default (:issue:`1906`)
+- Change default commission to .001 (:issue:`1946`)
+- Enable the ability to compute multiple pipelines (:issue:`1974`)
+- Allow users to switch between calendars (:issue:`1800`)
+- New filter ``NoMissingValues`` (:issue:`1969`)
+- Fail better on ``AssetFinder(nonexistent_path)`` (:issue:`2000`)
+- Implement csvdir bundle (:issue:`1860`)
+- Update quandl_bundle to use Quandl API v3 (:issue:`1990`)
+- Add ``FixedBasisPointsSlippage`` slippage model (:issue:`2047`)
+- Create MinLeverage control (:issue:`2064`)
 
 Experimental Features
 ~~~~~~~~~~~~~~~~~~~~~
@@ -28,36 +47,57 @@ Bug Fixes
 ~~~~~~~~~
 
 - ``history`` calls with a frequency of ``1d`` now work when using a Panel as the minute data source. (:issue:`1920`)
+- Check contract exists when using futures daily bar reader (:issue:`1892`)
+- ``NoDataBeforeDate`` edge cases (:issue:`1894`)
+- Fix frame column validation in Python 2.7.5 (:issue:`1954`)
+- Fix daily history for minute panel data backtest (:issue:`1920`)
+- ``get_last_traded_dt`` expects a trading day (:issue:`2087`)
+- Daily Adjustment perspective fix (:issue:`2089`)
 
 Performance
 ~~~~~~~~~~~
 
 - Change algorithm account validation from happening every minute in ``handle_data`` to only occurring once at the end of each day (:issue:`1884`)
+- Blaze core loader performance improvements (:issue:`1866`)
+- Add a new factor that just computes beta (:issue:`2021`)
+- Reduces memory footprint of Quandl WIKI Prices bundle (:issue:`2053`)
 
 Maintenance and Refactorings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Fills treasury data through the latest close price. (:issue: ``)
-- Sets ``RollingLinearRegressionOfReturns`` factor to be window_safe. (:issue: ``)
-- Sets ``RSI`` factor to be window_safe. (:issue: ``)
-- Adds some updates for better docs generation. (:issue:`1890`)
-- Removes and zeroes out unused treasury curves. (:issue:`1910`)
+- Add ``CachedObject.expired()`` (:issue:`1881`)
+- Set ``RollingLinearRegressionOfReturns`` factor to be window_safe (:issue:`1902`)
+- Set ``RSI`` factor to be window_safe (:issue:`1904`)
+- Updates for better docs generation (:issue:`1890`)
+- Remove and zero out unused treasury curves (:issue:`1910`)
+- Networkx 2 changes the behavior of out_degree (:issue:`1996`)
+- Pass calendars to ``DataPortal`` (:issue:`2026`)
+- Remove old Yahoo code (:issue:`2032`)
+- Sync and fill benchmarks through latest trading day (:issue:`2044`)
+- Provides better error message when QUANDL_API_KEY is missing (:issue:`2078`)
 
 Build
 ~~~~~
 
-None
+- Update the conda tools we're using to fix our packaging (:issue:`1942`)
+- Upgrade empyrical to 0.3.2 (:issue:`1983`)
+- Update conda tooling and remove Python 3.4 builds (:issue:`2009`)
+- Upgrade empyrical to 0.3.3 (:issue:`2014`)
+- Upgrade empyrical to 0.3.4 (:issue:`2098`)
 
 Documentation
 ~~~~~~~~~~~~~
 
-- Adds a tutorial on how to create a custom ``TradingCalendar``. (:issue:``)
-- Adds a tutorial on how to create a custom bundle from ``.csv`` files. (:issue:``)
-- Updates the README, Beginner Tutorial, and Jupyter Notebook to use the ``quandl`` bundle as the default, and links to how to get an API key from Quandl. (:issue: ``)
-- Removes mentions of Yahoo Finance from the tutorial. (:issue: #1845)
-- Includes MACDSignal in the docs. (:issue: ``)
-- Adds a "Contributing" section to the README. (:issue: ``)
-- 
+- Include ``MACDSignal`` in zipline.io documentation (:issue:`1828`)
+- Remove mentions of Yahoo from the Beginner Tutorial (:issue:`1845`)
+- Add contributing & questions section to the README (:issue:`1889`)
+- Add info about using a conda envs for installs (:issue:`1922`)
+- Fix Beginner Tutorial link (:issue:`1932`)
+- Add clean docs (:issue:`1943`)
+- Add distinct warnings for benchmark and treasury fetchers (:issue:`1971`)
+- Add CONTRIBUTING.rst (:issue:`2033`)
+- Add tutorial on creating a custom ``TradingCalendar`` (:issue:`2035`)
+- Docs & tutorial updates for ingesting, beginners, and csvdir (:issue:`2073`)
 
 Miscellaneous
 ~~~~~~~~~~~~~
