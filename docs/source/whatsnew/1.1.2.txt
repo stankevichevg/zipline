@@ -14,11 +14,11 @@ Highlights
 
 Zipline now defaults to using the ``quandl`` bundle, which you'll need an API Key for, and can find information about in the Data Bundles documentation.
 
-We've added many Tutorial & Documentations updates, includng information on how to create your own ``TradingCalendar``, pass it to your algorithm via the Zipline CLI, and how to use custom csv data using the ``csvdir`` bundle.
+We've added many Tutorial & Documentations updates, including information on how to create your own ``TradingCalendar``, pass it to your algorithm via the Zipline CLI, and how to use custom csv data using the ``csvdir`` bundle.
 
 Zipline is no longer being tested and packaged for Python 3.4.
 
-Zipline now requests data for SPY, the default benchmark used for Zipline backtests, using the `IEX Trading <https://iextrading.com>__` API, and no longer uses ``pandas-datareader``.
+Zipline now requests data for SPY, the default benchmark used for Zipline backtests, using the `IEX Trading <https://iextrading.com>__` API, and no longer uses ``pandas-datareader``. You can run a backtest up to 5 years from the current day using this data.
 
 Enhancements
 ~~~~~~~~~~~~
